@@ -1,0 +1,86 @@
+# depslib dependency file v1.0
+1591404762 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\main.cpp
+	<iostream>
+	<fstream>
+	"Game.h"
+
+1591848499 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\console.h
+	"Player.h"
+	<iostream>
+
+1591847786 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\console.cpp
+	"Console.h"
+	<iostream>
+
+1591403113 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\dice.cpp
+	"Dice.h"
+	<iostream>
+	<windows.h>
+
+1591403065 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\dice.h
+
+1591845140 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\player.cpp
+	"Player.h"
+	<iostream>
+
+1591845140 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\player.h
+	<string>
+
+1591403710 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\tile.cpp
+	"Tile.h"
+	<iostream>
+
+1591403710 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\tile.h
+	"Player.h"
+	<string>
+
+1591403859 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\snake.cpp
+	"Snake.h"
+	"Tile.h"
+
+1591403904 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\snake.h
+	"Tile.h"
+
+1591403979 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\ladder.cpp
+	"Ladder.h"
+	"Tile.h"
+
+1591403979 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\ladder.h
+	"Tile.h"
+
+1591845156 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\board.cpp
+	"Board.h"
+	"Console.h"
+	"Player.h"
+	"Dice.h"
+	"Tile.h"
+	"Snake.h"
+	"Ladder.h"
+	<iostream>
+
+1591404257 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\board.h
+	"Console.h"
+	"Player.h"
+	"Dice.h"
+	"Tile.h"
+
+1591404630 c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\include\game.h
+	"Console.h"
+	"Player.h"
+	<vector>
+
+1591847786 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\snakev2\src\game.cpp
+	"Game.h"
+	"Board.h"
+	"Console.h"
+	"Player.h"
+	"Dice.h"
+	"Tile.h"
+	"Snake.h"
+	"Ladder.h"
+	<iostream>
+	<vector>
+	<string>
+	<time.h>
+	<windows.h>
+

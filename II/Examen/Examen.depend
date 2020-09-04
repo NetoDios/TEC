@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1595970603 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\main.cpp
+	<iostream>
+	"Persona.h"
+	"Estudiante.h"
+	"Profesor.h"
+
+1591372303 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\src\persona.cpp
+	"Persona.h"
+	<string>
+
+1591372303 c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\include\persona.h
+	<string>
+
+1591372778 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\src\estudiante.cpp
+	"Estudiante.h"
+	<iostream>
+
+1591372738 c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\include\estudiante.h
+	"Persona.h"
+	<string>
+
+1591372980 source:c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\src\profesor.cpp
+	"Profesor.h"
+	<iostream>
+
+1591372963 c:\users\ernesto alvarez\documents\programacion\poo\segundo\examen\include\profesor.h
+	"Persona.h"
+	<string>
+
