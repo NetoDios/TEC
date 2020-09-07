@@ -10,6 +10,8 @@ class ListaEnteros{
         void swap(int i,int j);
         void merge(int ini,int fin);
         void mergeSort(int ini,int fin);
+        int partition(int ini,int fin);
+        void quickSort(int ini,int fin);
     public:
         ListaEnteros();
         ListaEnteros(int valores[],int lenght);
@@ -18,6 +20,7 @@ class ListaEnteros{
         void selectionSort();
         void insertionSort();
         void mergeSort();
+        void quickSort();
 
 };
 

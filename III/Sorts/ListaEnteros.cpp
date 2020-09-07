@@ -82,6 +82,29 @@ void ListaEnteros::mergeSort(int ini,int fin){
 void ListaEnteros::mergeSort(){
     mergeSort(0,this->size-1);
 }
+int ListaEnteros::partition(int ini,int fin){
+    int pivote=rand() % (fin-ini) + ini;
+    swap(pivote,ini);
+    int j=ini;
+    for(int i=j+1;i<=fin;i++){
+        if(this->valores[i]<=this->valores[ini]){
+            j++;
+            swap(i,j);
+        }
+    }
+    swap(ini,j);
+    return j;
+}
+void ListaEnteros::quickSort(int ini,int fin){
+    if(ini<fin){
+        int pivote=partition(ini,fin);
+        quickSort(ini, pivote-1);
+        quickSort(pivote+1,fin);
+    }
+}
+void ListaEnteros::quickSort(){
+    quickSort(0,this->size-1);
+}
 
 int main(){
     //int placeholder[]={420,17,16,42,69,911,666};
