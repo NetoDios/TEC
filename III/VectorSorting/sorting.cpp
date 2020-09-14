@@ -6,7 +6,6 @@
     Recibe un numero Q, y despues Q numeros, los cuales busca entre los datos ordenados e imprime la posicion
     Muestra las diferentes complejidades entre algoritmos (de comparaciones)
 
-
     13/09/2020
 */
 #include <iostream>
