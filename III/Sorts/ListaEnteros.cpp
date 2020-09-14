@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 #include "ListaEnteros.h"
 using namespace std;
 
@@ -83,17 +84,18 @@ void ListaEnteros::mergeSort(){
     mergeSort(0,this->size-1);
 }
 int ListaEnteros::partition(int ini,int fin){
+    srand(time(NULL));
     int pivote=rand() % (fin-ini) + ini;
     swap(pivote,ini);
-    int j=ini;
-    for(int i=j+1;i<=fin;i++){
-        if(this->valores[i]<=this->valores[ini]){
-            j++;
+    int i=ini+1;
+    for(int j=ini+1;j<=fin;j++){
+        if(this->valores[j] < this->valores[ini]){
+            i++;
             swap(i,j);
         }
     }
-    swap(ini,j);
-    return j;
+    swap(ini,i);
+    return i;
 }
 void ListaEnteros::quickSort(int ini,int fin){
     if(ini<fin){

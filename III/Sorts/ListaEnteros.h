@@ -6,7 +6,6 @@ class ListaEnteros{
         int* valores;
         int length;
         int size;
-
         void swap(int i,int j);
         void merge(int ini,int fin);
         void mergeSort(int ini,int fin);
@@ -16,12 +15,13 @@ class ListaEnteros{
         ListaEnteros();
         ListaEnteros(int valores[],int lenght);
         void print();
+        void secuentialQuerry();
+        void binaryQuerry();
         void bubbleSort();
         void selectionSort();
         void insertionSort();
         void mergeSort();
         void quickSort();
-
 };
 
 #endif // LISTAENTEROS_H
