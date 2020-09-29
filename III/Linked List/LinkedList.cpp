@@ -16,9 +16,8 @@ LinkedList::LinkedList(int* a, int size){
     }
 }
 LinkedList::~LinkedList(){
+    cout<<"DESTRUCTING...\n";
     destruct(this->head);
-    delete this->head;
-    delete this->last;
 }
 void LinkedList::destruct(ListNode* current){
     if(current->next!=nullptr)
@@ -31,7 +30,7 @@ int LinkedList::length(){
     return this->size;
 }
 bool LinkedList::isEmpty(){
-    return !(bool) this->size;
+    return this->size==0;
 }
 int LinkedList::start(){
     return this->head->value;
@@ -84,21 +83,26 @@ void LinkedList::removeBeginning(){
         head=head->next;
         this->size--;
         if(this->size==0)
-            last=nullptr;
+            this->last=nullptr;
         delete first;
     }
     else
         throw invalid_argument("Can't remove an element when the list is empty");
 }
 void LinkedList::removeEnd(){
-    ListNode* end=this->last;
-    ListNode* current;
-    for(int i=1;i<this->size;i++){
-        current=current->next;
+    if(this->size>0){
+        ListNode* end=this->last;
+        ListNode* current=this->head;
+        for(int i=1;i<this->size;i++){
+            current=current->next;
+        }
+        current->next=nullptr;
+        this->last=current;
+        this->size--;
+        delete end;
     }
-    current->next=nullptr;
-    delete end;
-    this->size--;
+    else
+        throw invalid_argument("Can't remove an element when the list is empty");
 }
 void LinkedList::removeAt(int index){ // solo funciona con index en el rango [1,N]
     if(index>this->size || index<0)
@@ -108,7 +112,7 @@ void LinkedList::removeAt(int index){ // solo funciona con index en el rango [1,
     else if(index==this->size-1)
         removeEnd();
     else{
-        ListNode* current=head;
+        ListNode* current=this->head;
         for(int i=1;i<index;i++) current=current->next;
         ListNode* aux=current->next;
         current->next = current->next->next;
@@ -133,17 +137,25 @@ int main(){
         start->insertBeginning(i);
     }
     cout<<*start;
+    start->~LinkedList();
+
     LinkedList* finish=new LinkedList();
     cout<<"\n\t---insertEnd\n";
     for(int i=1;i<=5;i++){
         finish->insertEnd(i);
     }
     cout<<*finish;
+    finish->~LinkedList();
 
     int aux[]={1,3,5,7,9,11,13};
     cout<<"\n\t---initial values\n";
     LinkedList* initial=new LinkedList(aux,7);
     initial->insertAt(6,3);
     cout<<*initial;
+    initial->removeAt(3);
+    initial->removeEnd();
+    cout<<*initial;
+    initial->~LinkedList();
+    
     return 0;
 }
