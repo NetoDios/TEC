@@ -133,20 +133,17 @@ int main(){
         start->insertBeginning(i);
     }
     cout<<*start;
-    delete start;
     LinkedList* finish=new LinkedList();
     cout<<"\n\t---insertEnd\n";
     for(int i=1;i<=5;i++){
         finish->insertEnd(i);
     }
     cout<<*finish;
-    delete finish;
 
     int aux[]={1,3,5,7,9,11,13};
     cout<<"\n\t---initial values\n";
     LinkedList* initial=new LinkedList(aux,7);
     initial->insertAt(6,3);
     cout<<*initial;
-    delete initial;
     return 0;
 }
