@@ -1,4 +1,5 @@
 #include "Logs.h"
+#include "DoubleLinkedList.h"
 #include "Bitacora.h"
 #include <string>
 using namespace std;
@@ -16,7 +17,7 @@ Bitacora::Bitacora( string filename ){
         while(getline( archivo , linea )) {
             vector<string> entrada = splitString( linea, " " );
             Logs* registro = new Logs( entrada[0] , entrada[1] , entrada[2] , entrada[3] , entrada[4] );
-            this -> myLogs.push_back( registro );
+            this -> myLogs.push( registro );
         }
     }
 }
@@ -66,12 +67,16 @@ Manda llamar el metodo print de la clase Logs
   Complegidad (sin incluir las llamadas a funciones):
     O(N): Itera un rango, cada posicion de ese rango
 */
-void Bitacora::printRange(int starting, int ending){
-    int startingIndex = busquedaBinariaMenor( starting );
-    int endingIndex = busquedaBinariaMayor( ending );
-    for(int i = endingIndex; i >= startingIndex ; i--){
-        this -> myLogs[i] -> print();
+void Bitacora::printRange(string starting, string ending,int index){
+    ofstream myFile;
+    myFile.open ( "bitacoraRango_" + to_string(index) + ".txt" );
+    ListNode* current = this-> myLogs.front();
+    while(current -> me -> getId() <= ending){
+      if(current -> me -> getId() >= starting)
+        current -> me -> print(myFile);
+      current = current -> next;
     }
+    myFile.close();
 }
 
 /**Metodo merge (Parte de algoritmo de ordenamiento)
@@ -98,8 +103,13 @@ void Bitacora::merge( int ini , int fin ){
             count[0] ++;
         }
     }
-    for(int i = 0 , j = ini ; j <= fin ; i++ , j++)
-        this -> myLogs[j] = aux[i];
+    ListNode* current = this->myLogs.front();
+    for(int i = 0 ; i < ini ; i++)
+        current = current->next;
+    for(int i = 0 , j = ini ; j <= fin ; i++ , j++){
+        current->me = aux[i];
+        current = current->next;
+    }
 }
 
 /*Llamadas recursivas de Merge Sort
@@ -110,11 +120,11 @@ void Bitacora::merge( int ini , int fin ){
   Complejidad (sin incluir las llamadas a funciones):
     O(Log(N)): Por la naturaleza divide los casos a la mitas en cada iteracion
 */
-void Bitacora::sortByDate( int ini , int fin ){
+void Bitacora::sortByIP( int ini , int fin ){
     if( ini < fin ){
         int avg = (ini + fin) / 2;
-        sortByDate( ini , avg );
-        sortByDate( avg + 1, fin );
+        sortByIP( ini , avg );
+        sortByIP( avg + 1, fin );
         merge( ini , fin );
     }
 }
@@ -124,60 +134,6 @@ Funcion de preparacion para inicializar Merge Sort en sortByDate
   Complegidad (sin incluir las llamadas a funciones):
     O(1): Solo hace un paso
 */
-void Bitacora::sortByDate(){
-    sortByDate( 0 , myLogs.size() - 1 );
-}
-
-/**
-Método de Busqueda Binaria (Algoritmo de Busqueda)
-
-Donde se busca el primer registro del dia pedido
-  Parmetros: int valor, que es el ID con el primer segundo del dia
-  Salida: posicion del registro que cumple con las condiciones anteriores
-  Complejidad :
-    O(Log(N)): Divide a la mitad el rango posible en cada iteracion
-*/
-int Bitacora::busquedaBinariaMenor( int valor ){
-    int min = 0;
-    int max = this -> myLogs.size() - 1 ;
-    int avg;
-    if( valor < this -> myLogs[0] -> getId() ) return 0;
-    if( valor > this -> myLogs[this -> myLogs.size() - 1 ] -> getId() ) return this -> myLogs.size();
-    while( min <= max ){
-        avg = ( min + max ) / 2;
-        if ( this -> myLogs[avg] -> getId() >= valor && this -> myLogs[ avg - 1 ] -> getId() < valor)
-            return avg;
-        else if( valor < this -> myLogs[avg] -> getId() )
-            max = avg - 1;
-        else
-            min = avg + 1;
-    }
-    return 0;
-}
-
-/**
-Método de Busqueda Binaria (Algoritmo de Busqueda)
-
-Donde se busca el ultimo registro del dia pedido
-  Parmetros: int valor, que es el ID con el ultimo segundo del dia
-  Salida: posicion del registro que cumple con las condiciones anteriores
-  Complejidad :
-    O(Log(N)): Divide a la mitad el rango posible en cada iteracion
-*/
-int Bitacora::busquedaBinariaMayor( int valor ){
-  int min = 0;
-  int max = this -> myLogs.size() - 1;
-  int avg;
-  if( valor < this -> myLogs[0] -> getId() ) return - 1;
-  if( valor > this -> myLogs[this -> myLogs.size() - 1] -> getId()) return this -> myLogs.size() - 1;
-  while(min <= max){
-      avg = (min + max) / 2;
-      if (this -> myLogs[avg] -> getId() <= valor && this -> myLogs[avg + 1] -> getId() > valor)
-          return avg;
-      else if(valor < this -> myLogs[avg] -> getId())
-          max = avg - 1;
-      else
-          min = avg + 1;
-  }
-  return 0;
+void Bitacora::sortByIP(){
+    sortByIP( 0 , myLogs.size() - 1 );
 }

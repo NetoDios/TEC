@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include "Logs.h"
+#include "DoubleLinkedList.h"
 #include "Bitacora.h"
 using namespace std;
 /**
@@ -10,25 +11,26 @@ La funcionalidad de este codigo es hacer busquedas por rangos de fechas en una b
 
   13/09/2020
 */
-// First date: Jun 1
-// Last date: Oct 30
+// First IP: Jun 1
+// Last IP: Oct 30
 
 
 int main(){
-  string mes , dia , continuar = "si";
-  int endingIndex;
+  string myIp, continuar = "si";
   Bitacora* bitacora = new Bitacora( "bitacora.txt" );
-  bitacora -> sortByDate();
+  bitacora -> sortByIP();
   bitacora -> print();
+  int i = 0;
   do{
-    cout << "Ingrese la fecha de inicio (Formato: MMM DD)\n";
-    cin >> mes >> dia;
-    Logs dateId1( mes , dia , "000000" , "N/A" , "N/A" );
-    cout << "Ingrese la fecha de final (Formato: MMM DD)\n";
-    cin >> mes >> dia;
-    Logs dateId2( mes , dia , "235959" , "N/A" , "N/A" );
-    if( dateId1.getId() <= dateId2.getId() ){
-      bitacora -> printRange( dateId1.getId() ,  dateId2.getId() );
+    cout << "Ingrese la ip de inicio (Formato: ###.###.###.##:####)\n";
+    cin >> myIp;
+    Logs ipID1( "N/A" , "N/A" , "N/A" , myIp , "N/A" );
+    cout << "Ingrese la ip final (Formato: ###.###.###.##:####)\n";
+    cin >> myIp;
+    Logs ipID2( "N/A" , "N/A" , "N/A" , myIp , "N/A" );
+    if( ipID1.getId() <= ipID2.getId() ){
+      i++;
+      bitacora -> printRange( ipID1.getId() ,  ipID2.getId() , i );
       cout << "\n¿Desea continuar? <si/no>\n"; 
       cin >> continuar ;
     }

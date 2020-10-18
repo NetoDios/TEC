@@ -104,7 +104,7 @@ void LinkedList::removeEnd(){
     else
         throw invalid_argument("Can't remove an element when the list is empty");
 }
-void LinkedList::removeAt(int index){ // solo funciona con index en el rango [1,N]
+void LinkedList::removeAt(int index){ 
     if(index>this->size || index<0)
         throw invalid_argument("index out of range");
     else if(index==0)
@@ -156,6 +156,6 @@ int main(){
     initial->removeEnd();
     cout<<*initial;
     initial->~LinkedList();
-    
+
     return 0;
 }
