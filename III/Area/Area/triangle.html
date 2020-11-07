@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>Área de un triangulo</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <link href="icon.png" rel="icon"/>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    </head>
+    <body>
+        <main id="myCanvas" >
+        </main>
+        <section class="Bottom">
+            <div class="Area">
+                Área
+                <div class="Value">
+                    <div id="areaVal">null</div>
+                    <div> u<sup style="font-size: small;">2</sup></div>
+                </div>
+            </div>
+            <button onclick="randomize();" class="Rand">
+                <div class="Titulo">
+                    RANDOM
+                </div>
+            </button>
+        </section>
+
+        <script>
+            circles=[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
+            var width;
+            var height;
+            function setup() {
+                width = document.getElementById("myCanvas").offsetWidth;
+                height = document.getElementById("myCanvas").offsetHeight;
+                createCanvas(width, height);
+                randomize();
+            }
+            function draw() {
+                stroke('rgb(23,74,153)');
+                strokeWeight(3);
+                line(circles[1][0], circles[1][1], circles[2][0], circles[2][1]);
+                line(circles[1][0], circles[1][1], circles[3][0], circles[3][1]);
+                line(circles[3][0], circles[3][1], circles[2][0], circles[2][1]);
+                fill(255);
+                noStroke()
+                for(i=1;i<=3;i++){
+                    ellipse(circles[i][0], circles[i][1], 20, 20);
+                    textSize(15);
+                    x=circles[i][0];
+                    y=circles[i][1];
+                    cordenates= "("+(x)+" , "+y+")";
+                    text(cordenates, circles[i][0], circles[i][1]-20);
+                }
+                area();
+            }
+            function area(){
+                var neto=0;
+                var area = document.getElementById("areaVal");
+                for(i=1;i<=4;i++){
+                    neto+=circles[i][0]*circles[i+1][1];
+                    neto-=circles[i][0]*circles[i-1][1];
+                }
+                neto=abs(neto/2);
+                neto=round(neto*1000);
+                neto/=1000;
+                area.innerHTML=neto;
+                return false;
+            }
+            function mouseDragged(){
+                for(i=1;i<=4;i++){
+                    if(Math.pow( ( mouseX - circles[i][0] ), 2 )+Math.pow( ( mouseY - circles[i][1] ), 2 ) <= 400){
+                        if(mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height ){
+                            circles[i][0]=round(mouseX,0);
+                            circles[i][1]=round(mouseY,0);
+                        }
+                    }
+                }
+                
+                updateCircle();
+                return false;
+            }
+            function randomize(){
+                for(i=1;i<=3;i++){
+                    circles[i][0]=round(Math.random() * (width),0);
+                    circles[i][1]=round(Math.random() * (height),0);
+                }
+                updateCircle();
+                return false;
+            }
+            function updateCircle(){
+                circles[4][0]=circles[1][0];
+                circles[4][1]=circles[1][1];
+                clear();
+                return false;
+            }
+        </script>
+    </body>
+</html>
+
+    <!-- body onload="draw();">
+        <canvas id="circle" width="150" height="150"></canvas>
+    </body -->
