@@ -3,24 +3,17 @@
 
 #include <vector>
 #include <iostream>
-#include <fstream>
-#include "Logs.h"
-#include "DoubleLinkedList.h"
+#include "BST.h"
 using namespace std;
 
 class Bitacora{
     private:
-        DoubleLinkedList myLogs;
-        void merge(int ini,int fin);
-        void sortByIP(int ini,int fin);
+        BST myBST;
         vector<string> splitString(string text, string delimiter);
+		void top(Node* current, int& num);
     public:
         Bitacora(string filename);
-        void print();
-        void printRange(string starting,string ending, int index);
-        void sortByIP();
-        int busquedaBinariaMenor(int valor);
-        int busquedaBinariaMayor(int valor);
+		void top(int num);
 };
 
 #endif // BITACORA_H
