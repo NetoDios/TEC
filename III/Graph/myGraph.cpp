@@ -1,7 +1,7 @@
 /*  MyGraph
     Implementacion de busquedas en grafos, tanto BFS como DFS, ambos imprimen el recorrido
         Para ambos casos el usuario puede seleccionar el nodo en el que incia la busqueda
-
+    
     9 de Nov de 2020
 */
 #include "myGraph.h"
@@ -106,23 +106,156 @@ void MyGraph::BFS( int starting ){
     }
 }
 
+/*  topologicalSort
+        Para todo nodo con grado de entrada igual a 0:
+            Reducir el grado de entrada de todos los nodos
+    Complegidad:
+        Worst Case - cuadratica O(N²) : Recorre todos los vertices y aristas
+*/
+void MyGraph::topologicalSort(){
+    bool visited[ this->size ];
+    int daddys[ this->size ];
+    queue<int> toVisit;
+    int current = 0;
+    for( int i = 0 ; i < this->size ; i++ ){
+		visited[i] = false;
+        daddys[i] = 0;
+    }
+    for( int i = 0 ; i < this->size ; i++ )
+        for ( int ii = 0 ; ii < this->matriz[i].size() ; ii++ ){
+            if( this -> matriz[i][ii] != 0 )
+                daddys[ ii ]++;
+        }
+    for( int i = 0 ; i < this->size ; i++ ){
+        if ( daddys[i] == 0 ){
+            toVisit.push(i);
+            visited[i] = true;
+        }
+    }
+    while( !toVisit.empty() ){
+        current = toVisit.front();
+        toVisit.pop();
+        cout<<current<<",";
+        for( int ii = 0 ; ii < this->matriz[current].size() ; ii++ ){
+            if( matriz[current][ii] != 0 ){
+                daddys[ii]--;
+                if( daddys[ii] == 0 ){
+                    visited[ii] = true;
+                    toVisit.push( ii );
+                }
+            }
+        }
+    }
+}
+
+/*  isTree
+        Recorre la matriz de adyasencia
+            Si encuentra dos conecciones en una columna retorna falso
+                Si hay ciclos dentro del grafo retorna falso
+            En caso contrario retorna verdadero
+        Asume que el nodo raiz siempre sera el nodo 0
+    Output:
+        bool:
+            Representacion de si es o no un arbol N-ario, True = si ; False = no
+    Complegidad:
+        Best Case - lineal O(N) : los primeros dos nodos visitados estan conectas bidireccionalmente
+        Worst Case - cuadratica O(N²) : si es un arbol
+*/
+bool MyGraph::isTree(){
+    bool visited[ this->size ];
+    for( int i = 0 ; i < this->size ; i++ )
+		visited[i] = false;
+    queue<int> toVisit;
+    int current = 0;
+
+    visited[ 0 ] = true;
+    toVisit.push( 0 );
+
+    while( !toVisit.empty() ){
+        current = toVisit.front();
+        toVisit.pop();
+        
+        for( int ii = 0 ; ii < this->matriz[current].size() ; ii++ ){
+            if( !visited[ii] && this->matriz[current][ii] != 0 ){
+                toVisit.push( ii );
+                visited[ii] = true;
+            }
+            else if( visited[ii] && this->matriz[current][ii] != 0 )
+                return false;
+        }
+    }
+    return true;
+}
+
+/*  bipartiteGraph
+        Para todo nodo sin visitar:
+            Lo asigna a un subconjunto de nodos
+                A todas sus conecciones las asigna a un subconjunto opuesto
+    Output:
+        bool:
+            Representacion de si es o no un grafo bipartito, True = si ; False = no
+    Complegidad:
+        Worst Case - cuadratica O(N²) : Recorre todos los vertices y aristas
+*/
+bool MyGraph::bipartiteGraph(){
+    bool visited[ this->size ];
+    bool type[ this->size ];
+    for( int i = 0 ; i < this->size ; i++ ){
+		visited[i] = false;
+        type[i] = false;
+    }
+    queue<int> toVisit;
+    int current = 0;
+
+    for( int i = 0 ; i < this->matriz.size() ; i++ ){
+		if( !visited[i] ){
+		    visited[i] = true;
+			toVisit.push( i );
+            while( !toVisit.empty() ){
+                current = toVisit.front();
+                toVisit.pop();
+                for( int ii = 0 ; ii < this->matriz[current].size() ; ii++ ){
+                  if( this->matriz[current][ii] != 0 ){
+                    if( !visited[ii]){
+                        toVisit.push( ii );
+                        visited[ ii ] = true;
+                        type[ ii ] = !type[ current ];
+                    }
+                    else if( type[ii] == type[current] )
+                        return false;
+                }
+                }
+            }
+        }
+    }
+    return true;
+}
+
 int main(){
-    vector<vector<int> > yes={{0,1,1,1,1,0,0,0,0},
-                            {0,0,0,0,0,1,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,1,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,1,0},
-                            {0,0,0,0,0,0,0,0,1},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0}};
-  
-  MyGraph grafo;
-	grafo.loadGraph( yes );
-	cout << "\n--------DFS--------\n";
-    grafo.DFS( 1 );
-	cout << "\n--------BFS--------\n";
-	grafo.BFS( 1 );
-	cout << "\n";
+    vector<vector<int> > mientras={
+    {0,1,1,1,1,0,0,0,0},
+    {0,0,0,0,0,1,0,0,0},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,1,0,0},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,1,0},
+    {0,0,0,0,0,0,0,0,1},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0}};
+
+    MyGraph grafo;
+    grafo.loadGraph(mientras);
+    if( grafo.isTree() )
+        cout<<"Es Arbol\n";
+    else
+        cout<<"No es Arbol\n";
+
+    if( grafo.bipartiteGraph() )
+        cout<<"Es bipartito\n";
+    else
+        cout<<"No es bipartito\n";
+
+    cout<<"---Orden Topologico\n";
+    grafo.topologicalSort();
     return 0;
 }

@@ -25,6 +25,9 @@ class MyGraph{
         void loadGraph( vector<vector<int> >& matriz );
         void BFS( int starting );
         void DFS( int starting );
+        void topologicalSort();
+        bool isTree();
+        bool bipartiteGraph();
 };
 
 #endif
