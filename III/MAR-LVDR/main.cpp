@@ -2,14 +2,27 @@
 #include "Bitacora.h"
 using namespace std;
 /**
-La funcionalidad de este codigo es encontrar las 5 direcciones de ip más repetidas (sin considerar el puerto) partiendo de los registros del archivo bitacora (los cuales estan previamente ordenados por ip); para lo cual se hace dentro de una estructura de Binary Search Tree, tomando los valores posicionados mas a la derecha.
+La funcionalidad de este codigo es recorrer la bitacora y mete cada log (fecha e ip) a una hash table para encontrar 
 
+29/11/2020
 
-  02/11/2020
 */
 
 int main(){
-  Bitacora* bitacora = new Bitacora( "bitacora.txt" ) ;
-  bitacora -> top(5) ;
+  Bitacora bitacora = Bitacora( "bitacora2.txt" ) ;
+  string ip;
+  bool seguir;
+  do{
+    try{
+      cout << "Ingrese una ip: ";
+      cin >> ip;
+      cout << bitacora[ip] << endl;
+    }catch( exception& e ){
+      cout << e.what() << endl;
+    }
+    cout << "Quiere continuar [1 : 0]\n";
+    cin >> seguir;
+  }while(seguir);
+  
   return 0;
 }

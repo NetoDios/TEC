@@ -2,18 +2,30 @@
 #define BITACORA_H
 
 #include <vector>
+#include <limits>
 #include <iostream>
-#include "BST.h"
+#include "LinkedList.h"
 using namespace std;
 
 class Bitacora{
     private:
-        BST myBST;
+        LinkedList* table;
+        int size, len;
+        
         vector<string> splitString(string text, string delimiter);
-		void top(Node* current, int& num);
+        int getPosition( string key );
+        string createDate( string month, string day, string time );
+        string monthId( string month );
+        void rehash();
     public:
         Bitacora(string filename);
-		void top(int num);
+        ListNode* operator [](string key){
+          int pos = getPosition( key );
+          ListNode* aux = this->table[pos].getAt(key);
+          if(aux)
+            return aux;
+          throw invalid_argument("Key not found: There is no key value " + key);
+        }
 };
 
 #endif // BITACORA_H
