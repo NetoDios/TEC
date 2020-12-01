@@ -1,0 +1,66 @@
+*{
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
+h1{
+  font-family: 'Overpass', sans-serif;
+}
+.Center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.feet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+svg{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.Columna {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.ND {
+  display: none;
+}
+.Borde-Redondo {
+  border-radius: 15px;
+}
+.Margen {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.Text-Center {
+  text-align: center;
+}
+.Letra-Tranqui{
+  font-size: medium;
+  font-weight: bold;
+}
+.Color-Coral {
+  background-color: rgb(234, 53, 108);
+}
+.Color-Amarillo {
+  background-color: rgb(255, 172, 22);
+}
+.Color-Nav {
+  background-color: #325c76;
+}
+.Color-Back {
+  background-color: #132937;
+}
+
+.Font-Coral {
+  color: rgb(234, 53, 108);
+}
+.Font-Amarillo {
+  color: rgb(255, 172, 22);
+}
