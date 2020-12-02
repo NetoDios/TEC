@@ -34,6 +34,9 @@ function today(){
   var tit  =document.getElementById("Titulo");
   tit.innerHTML = "EL DÍA DE HOY";
 
+  var muchoTexto = document.getElementById("Descripcion");
+  muchoTexto.innerHTML = "Estás viendo la cantidad de clientes en cada hora del día";
+
   var inner = document.getElementById("inner");
   var horas = document.createElement("DIV");
   horas.className = "carousel-item active";
@@ -82,6 +85,9 @@ function today(){
 function day(start){
   navActive(3);
   
+  var muchoTexto = document.getElementById("Descripcion");
+  muchoTexto.innerHTML = " ";
+
   var inner = document.getElementById("inner");
   var horas = document.createElement("DIV");
   horas.className = "carousel-item";
@@ -131,6 +137,10 @@ function day(start){
 }
 function range(start,end){
   navActive(3);
+
+  var muchoTexto = document.getElementById("Descripcion");
+  muchoTexto.innerHTML = " ";
+
   var tit  = document.getElementById("Titulo");
   tit.innerHTML = "RANGO PERSONALIZADO";
 
@@ -206,6 +216,9 @@ function week(){
   navActive(0);
   var tit  = document.getElementById("Titulo");
   tit.innerHTML = "ESTA SEMANA";
+  var muchoTexto = document.getElementById("Descripcion");
+  muchoTexto.innerHTML = "Estás viendo la cantidad de clientes en cada día de la semana";
+
   var inner = document.getElementById("inner");
   var dias = document.createElement("DIV");
   var horas = document.createElement("DIV");
@@ -278,6 +291,8 @@ function month(){
   navActive(1);
   var tit  = document.getElementById("Titulo");
   tit.innerHTML = "ESTE MES";
+  var muchoTexto = document.getElementById("Descripcion");
+  muchoTexto.innerHTML = "Estás viendo la cantidad de clientes en cada día del mes";
   
   var inner = document.getElementById("inner");
   var dias = document.createElement("DIV");
@@ -349,6 +364,8 @@ function alTime(){
   navActive(2);
   var tit  = document.getElementById("Titulo");
   tit.innerHTML = "TODO EL TIEMPO";
+  var muchoTexto = document.getElementById("Descripcion");
+  muchoTexto.innerHTML = "Estás viendo el historial de clientes desde que adquiriste nuestro servicio";
   
   var inner = document.getElementById("inner");
   var dias = document.createElement("DIV");
@@ -439,7 +456,7 @@ function dayCode(day){
   if(day == 0) return "Domingo";
   if(day == 1) return "Lunes";
   if(day == 2) return "Martes";
-  if(day == 3) return "Miercoles";
+  if(day == 3) return "Miércoles";
   if(day == 4) return "Jueves";
   if(day == 5) return "Viernes";
   if(day == 6) return "Sabado";
